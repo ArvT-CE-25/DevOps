@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 400px;
+            background-color: #1E1E1E;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin: 10px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #E0E0E0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 16px;
+            color: #B0B0B0; 
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #E0E0E0; 
+            font-size: 16px;
+        }
+        select:focus, input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #E0E0E0;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Operations Calculator</h1>
+        <form id="calcForm">
+            <div class="form-group">
+                <label for="operation">Select Operation:</label>
+                <select id="operation">
+                    <option value="factorial">Factorial</option>
+                    <option value="fibonacci">Fibonacci</option>
+                    <option value="power">Power</option>
+                    <option value="sumArray">Sum of Array</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="input">Enter Value(s):</label>
+                <input type="text" id="input" placeholder="Enter number(s)">
+            </div>
+
+            <button type="button" onclick="performOperation()">Calculate</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function performOperation() {
+            const operation = document.getElementById('operation').value;
+            const input = document.getElementById('input').value.trim();
+            let result = '';
+
+            // Check if the input is empty
+            if (input === '') {
+                result = 'Please enter a valid input.';
+            } else {
+                const numbers = input.split(',').map(num => num.trim());
+
+                // Validate each number
+                const invalidInput = numbers.some(num => isNaN(num) || num === '');
+                if (invalidInput) {
+                    result = 'Please enter valid numbers separated by commas.';
+                } else {
+                    // Convert the inputs to integers
+                    const numericValues = numbers.map(num => parseInt(num));
+
+                    switch (operation) {
+                        case 'factorial':
+                            result = factorial(numericValues[0]);
+                            break;
+                        case 'fibonacci':
+                            result = fibonacci(numericValues[0]);
+                            break;
+                        case 'power':
+                            if (numericValues.length < 2) {
+                                result = 'Please enter both base and exponent for power operation.';
+                            } else {
+                                result = power(numericValues[0], numericValues[1]);
+                            }
+                            break;
+                        case 'sumArray':
+                            result = sumArray(numericValues);
+                            break;
+                        default:
+                            result = 'Invalid operation';
+                    }
+                }
+            }
+
+            document.getElementById('result').textContent = `Result: ${result}`;
+        }
+
+        function factorial(n) {
+            if (n < 0) return 'Factorial is not defined for negative numbers';
+            if (n === 0) return 1;
+            let fact = 1;
+            for (let i = 1; i <= n; i++) {
+                fact *= i;
+            }
+            return fact;
+        }
+
+        function fibonacci(n) {
+            if (n < 0) return 'Fibonacci is not defined for negative numbers';
+            let fib = [0, 1];
+            for (let i = 2; i <= n; i++) {
+                fib[i] = fib[i - 1] + fib[i - 2];
+            }
+            return fib[n];
+        }
+
+        function power(base, exponent) {
+            if (isNaN(base) || isNaN(exponent)) return 'Please enter valid numbers for base and exponent';
+            return Math.pow(base, exponent);
+        }
+
+        function sumArray(arr) {
+            return arr.reduce((acc, val) => acc + val, 0);
+        }
+    </script>
+
+</body>
+</html>
