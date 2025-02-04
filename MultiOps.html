@@ -12,21 +12,21 @@
         <h1>Operations Calculator</h1>
         <form id="calcForm">
             <div class="form-group">
-                <label for="operation">Select Operation:</label>
+                <label for="operation">Choose an Operation:</label>
                 <select id="operation">
                     <option value="factorial">Factorial</option>
                     <option value="fibonacci">Fibonacci</option>
-                    <option value="power">Power</option>
-                    <option value="sumArray">Sum of Array</option>
+                    <option value="power">Exponentiation</option>
+                    <option value="sumArray">Sum of Numbers</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="input">Enter Value(s):</label>
-                <input type="text" id="input" placeholder="Enter number(s)">
+                <label for="input">Enter Values:</label>
+                <input type="text" id="input" placeholder="Enter number(s), separated by commas">
             </div>
 
-            <button type="button" onclick="performOperation()">Calculate</button>
+            <button type="button" onclick="performOperation()">Compute</button>
         </form>
 
         <div id="result"></div>
@@ -40,37 +40,37 @@
 
             // Check if the input is empty
             if (input === '') {
-                result = 'Please enter a valid input.';
+                result = 'Input is required.';
             } else {
                 const numbers = input.split(',').map(num => num.trim());
 
-                // Validate each number
+                // Validate if all inputs are numbers
                 const invalidInput = numbers.some(num => isNaN(num) || num === '');
                 if (invalidInput) {
-                    result = 'Please enter valid numbers separated by commas.';
+                    result = 'All values must be valid numbers separated by commas.';
                 } else {
                     // Convert the inputs to integers
                     const numericValues = numbers.map(num => parseInt(num));
 
                     switch (operation) {
                         case 'factorial':
-                            result = factorial(numericValues[0]);
+                            result = calculateFactorial(numericValues[0]);
                             break;
                         case 'fibonacci':
-                            result = fibonacci(numericValues[0]);
+                            result = calculateFibonacci(numericValues[0]);
                             break;
                         case 'power':
                             if (numericValues.length < 2) {
-                                result = 'Please enter both base and exponent for power operation.';
+                                result = 'Both base and exponent are required for exponentiation.';
                             } else {
-                                result = power(numericValues[0], numericValues[1]);
+                                result = calculatePower(numericValues[0], numericValues[1]);
                             }
                             break;
                         case 'sumArray':
-                            result = sumArray(numericValues);
+                            result = calculateSumArray(numericValues);
                             break;
                         default:
-                            result = 'Invalid operation';
+                            result = 'Unknown operation';
                     }
                 }
             }
@@ -78,8 +78,8 @@
             document.getElementById('result').textContent = `Result: ${result}`;
         }
 
-        function factorial(n) {
-            if (n < 0) return 'Factorial is not defined for negative numbers';
+        function calculateFactorial(n) {
+            if (n < 0) return 'Factorial cannot be calculated for negative numbers.';
             if (n === 0) return 1;
             let fact = 1;
             for (let i = 1; i <= n; i++) {
@@ -88,8 +88,8 @@
             return fact;
         }
 
-        function fibonacci(n) {
-            if (n < 0) return 'Fibonacci is not defined for negative numbers';
+        function calculateFibonacci(n) {
+            if (n < 0) return 'Fibonacci is undefined for negative numbers.';
             let fib = [0, 1];
             for (let i = 2; i <= n; i++) {
                 fib[i] = fib[i - 1] + fib[i - 2];
@@ -97,12 +97,12 @@
             return fib[n];
         }
 
-        function power(base, exponent) {
-            if (isNaN(base) || isNaN(exponent)) return 'Please enter valid numbers for base and exponent';
+        function calculatePower(base, exponent) {
+            if (isNaN(base) || isNaN(exponent)) return 'Both base and exponent should be valid numbers.';
             return Math.pow(base, exponent);
         }
 
-        function sumArray(arr) {
+        function calculateSumArray(arr) {
             return arr.reduce((acc, val) => acc + val, 0);
         }
     </script>
