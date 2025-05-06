@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operation History</title>
+  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body onload="loadHistory()">
+  <div class="container">
+    <header>
+      <h1>Operations History</h1>
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-sun"></i> <!-- Sun icon for Light mode -->
+      </button>
+    </header>
+
+    <ul id="history-list"></ul>
+
+    <button onclick="exportHistoryToPDF()">Export to PDF</button>
+
+    <div class="nav-buttons">
+      <a href="index.html">Back to Calculator</a>
+      <a href="graphs.html">View Graph</a>
+<button onclick="clearHistory()">Clear History</button>
+    </div>
+<footer >
+<h6 align ="right" >Arvinda Tandel CE 242050025 Calculator ©</h6>
+</footer>
+  </div>
+
+  <script src="main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>

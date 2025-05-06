@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Operations Calculator</h1>
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-sun"></i> 
+      </button>
+    </header>
+
+    <form id="calculator-form">
+      <div class="form-group">
+        <label for="operation">Select Operation:</label>
+        <select id="operation">
+          <option value="factorial">Factorial</option>
+          <option value="fibonacci">Fibonacci</option>
+          <option value="power">Exponentiation</option>
+          <option value="sumArray">Sum of Array</option>
+          <option value="gcd">GCD</option>
+          <option value="lcm">LCM</option>
+          <option value="prime">Prime Check</option>
+          <option value="average">Average</option>
+          <option value="minmax">Min/Max</option>
+          <option value="sqrt">Square Root</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="input">Enter Numbers (comma-separated):</label>
+        <input type="text" id="input" placeholder="Enter numbers">
+      </div>
+      <button type="button" onclick="performOperation()">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <div class="nav-buttons">
+      <a href="history.html">View History</a>
+      <a href="graphs.html">View Graph</a>
+    </div>
+<footer >
+<h6 align ="right" >Arvinda Tandel CE 242050025 Calculator ©</h6>
+</footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
